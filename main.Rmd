@@ -1,0 +1,69 @@
+---
+# Pandoc header, everything that is inserted here is only for the computer to know what and how to compile the output. 
+linestretch: 1.5                 # get some spacing between the lines you write
+bibliography: bib.bib            # this is your bibliography file exported with Zotero, Medeley, ...
+link-citations: yes              # make your links clickable
+output: 
+  bookdown::pdf_document2:       # bookdown::pdf_document2 provides more features than pdf_document
+    number_sections: true        # chapters will be assigned numbers automatically
+    includes:
+      in_header: tex_styles.sty  # here goes the metadata (your name, university, ..., and LaTex packages)
+      before_body:               # include pages before the main part of the document in the following order 
+        - before_body/front_matter.Rmd       
+        - before_body/abstract.Rmd
+        - before_body/acknowledgements.Rmd
+        - before_body/table_of_contents.Rmd
+        - before_body/list_of_figures.Rmd
+        - before_body/list_of_tables.Rmd
+      after_body:                # ... and after the main part
+        - after_body/declaration.Rmd
+toc: false                       # we have already included a table of contents
+geometry: "left=3cm, right=3cm, top=2cm, bottom=2.5cm"  # adjust margins of your document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+
+# install kableExtra if not installed
+if(!require(kableExtra)){
+    install.packages("kableExtra")
+    library(kableExtra)
+}
+```
+
+\pagenumbering{arabic}
+
+# Introduction
+
+This example document introduces the key functionalities of RMarkdown. After reading the following, you should also be familiar with the features RMarkdown offers for formatting your document. This is mostly borrowed from an introductory article hosted on the [RStudio website](https://rmarkdown.rstudio.com/articles_intro.html).
+
+# RMarkdown documents
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents.
+
+When you click the **Knit** button or press **Shift + Cmd + k** a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r table2, echo=F, message=F, warnings=F, results='asis'}
+# kableExtra provides advanced costumization
+kableExtra::kable_styling(
+  
+  # kable() is a standard option for formatting tables
+  knitr::kable(head(mtcars), caption = "mtcars"), 
+  
+latex_options = c("hold_position", # places table directly after the text
+                  "striped"))
+```
+
+\newpage
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE, fig.cap="mtcars plot"}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot. 
+
+More details on formatting RMarkdown documents can be found in the [Bookdown](https://bookdown.org/yihui/rmarkdown/) manual [@xie2016bookdown]
+
+# References {-}

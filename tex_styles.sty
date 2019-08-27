@@ -1,0 +1,31 @@
+% latex packages
+\usepackage{setspace}
+\usepackage{float}
+
+% commands for document metadata
+\newcommand{\University}{Zeppelin University}
+\newcommand{\StudyProgramme}{Sociology, Politics \& Economics}
+\newcommand{\Class}{Quantitative Methods}
+\newcommand{\AssignmentName}{Term Paper}
+\newcommand{\Title}{An Informative Title}
+
+\setlength{\abovedisplayskip}{-15pt}
+\setlength{\belowdisplayskip}{0pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{0pt}
+
+\newcommand{\Name}{Student Name}
+\newcommand{\MatriculationNumber}{123456789}
+\newcommand{\Date}{Month Day, 20xx}
+\newcommand{\Place}{Friedrichshafen}
+\newcommand{\Semester}{Spring 20xx}
+\newcommand{\Supervisor}{Prof Dr X}
+
+% let figures and tables be placed exactly where they are created in the rmarkdown document
+\let\origfigure\figure
+\let\endorigfigure\endfigure
+\renewenvironment{figure}[1][2] {
+    \expandafter\origfigure\expandafter[H]
+} {
+    \endorigfigure
+}
